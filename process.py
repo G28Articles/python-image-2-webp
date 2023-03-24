@@ -3,10 +3,12 @@ from PIL import Image
 
 path = "./images/"
 width = 1200
-extension = ".png"
+extension = ".PNG"
 
 def convert_to_webp():
     try:
+        counter = 0
+        print("lendo pasta imagens")
         for filename in os.listdir(path):
             if filename.endswith(extension):
                 print("lendo arquivo " + filename)
@@ -17,7 +19,8 @@ def convert_to_webp():
                 im.save(os.path.join(path, filename + "_resized" + extension))
                 im2 = Image.open(os.path.join(path, filename + "_resized" + extension))
                 im2.save(os.path.join(path, filename.replace(extension, ".webp")), "webp")
-            print("Images converted to WebP successfully!")
+                counter = counter + 1
+            print(str(counter) + " images converted to WebP.")
     except Exception as error:
         print(error.args)
 
